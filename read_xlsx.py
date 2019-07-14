@@ -42,7 +42,7 @@ for file in os.listdir(data_base_dir):  # 遍历目标文件夹
     # for row in rows:
     #     line = [col.value for col in row]
     #通过坐标读取值
-    # cell_11 = booksheet.cell('A1').value
+    # cell_11 = booksheet.cell('A1').value      
     cell_11 = booksheet.cell(row=1, column=1).value
     if serial_number == booksheet.cell(row=1, column=2).value:
         values = [booksheet.cell(row=r, column=2).value for r in range(1, 24)]
