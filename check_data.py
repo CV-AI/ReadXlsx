@@ -11,9 +11,9 @@ ignore_list = ['060806', '060907']
 def check_data(sheet, mean, var):
     error_names = ''
     whether_wrong = True
-    values = [booksheet.cell(row=r, column=2).value for r in range(2, 24)]
+    values = [sheet.cell(row=r, column=2).value for r in range(2, 24)]
     # 如果不在3个sigma范围内则设为False，标志为有问题
-    value_check = [(abs(values[i] - mean[i]) < 3* std[i]) for i in range(len(values)-1)]
+    value_check = [(abs(values[i] - mean[i]) < 3* std[i]) for i in range(len(values))]
     keys = ['Age', 'Gender', 'InterASIS', 'Bi-iliac width', 'Bi-trochanteric width', 
             'Thigh Length_L', 'Thigh Length_R', 'Calf Length_L', 'Calf Lenght_R', 'Knee Width_L', 'Knee Width_R',
             'Malleolos Width_L', 'Malleolus Width_R', 'Malleolus Height_L', 'Malleolus Height_R',
@@ -21,7 +21,7 @@ def check_data(sheet, mean, var):
     # 
     for i in range(0, len(value_check)):
         if value_check[i] is False:
-            error_names += keys[i] + " "
+            error_names += keys[i] + ":{} ".format(sheet.cell(row=i+2, column=2).value)
             whether_wrong = False
     return whether_wrong, error_names
 
